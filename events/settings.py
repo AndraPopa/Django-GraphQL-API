@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'events.api'
 ]
 
+GRAPHENE = {
+    'SCHEMA': 'events.schema.schema'
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
