@@ -32,8 +32,13 @@ class Query(graphene.ObjectType):
     all_events = graphene.List(EventType)
     event = graphene.Field(EventType, id=graphene.Int(), title=graphene.String())
 
+    all_presenters = graphene.List(PresenterType)
+
     def resolve_all_events(self, info, **kwargs):
         return Event.objects.all()
+
+    def resolve_all_presenters(self, info, **kwargs):
+        return Presenter.objects.all()
 
     def resolve_event(self, info, **kwargs):
         id = kwargs.get('id')
