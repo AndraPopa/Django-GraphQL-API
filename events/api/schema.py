@@ -2,7 +2,7 @@ from datetime import datetime
 
 import graphene
 from graphene_django.types import DjangoObjectType
-from .models import Event
+from .models import Event, Presenter
 
 
 class EventType(DjangoObjectType):
@@ -21,6 +21,11 @@ class EventType(DjangoObjectType):
             return "Already passed"
         else:
             return "A little bit more"
+
+
+class PresenterType(DjangoObjectType):
+    class Meta:
+        model = Presenter
 
 
 class Query(graphene.ObjectType):
