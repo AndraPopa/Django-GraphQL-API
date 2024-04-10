@@ -66,5 +66,31 @@ class EventCreateMutation(graphene.Mutation):
 
         return EventCreateMutation(event=event)
 
+
+class EventUpdateMutation(graphene.Mutation):
+    class Arguments:
+        title = graphene.String()
+        date = graphene.Date()
+        mandatory = graphene.Boolean()
+        id = graphene.ID(required=True)
+
+    event = graphene.Field(EventType)
+
+    def mutate(self, info, id, title=None, date=None, mandatory=None):
+        event = Event.objects.get(pk=id)
+
+        if title is not None:
+            event.title = title
+        elif date is not None:
+            event.date = date
+        elif mandatory is not None:
+            event.mandatory = mandatory
+
+        event.save()
+
+        return EventUpdateMutation(event=event)
+
+
 class Mutation:
     create_event = EventCreateMutation.Field()
+    update_event = EventUpdateMutation.Field()
