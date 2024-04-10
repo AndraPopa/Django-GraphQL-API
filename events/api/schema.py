@@ -51,3 +51,20 @@ class Query(graphene.ObjectType):
             return Event.objects.get(title=title)
 
         return None
+
+
+class EventCreateMutation(graphene.Mutation):
+    class Arguments:
+        title = graphene.String(required=True)
+        date = graphene.Date(required=True)
+        mandatory = graphene.Boolean(required=True)
+
+    event = graphene.Field(EventType)
+
+    def mutate(self, info, title, date, mandatory):
+        event = Event.objects.create(title=title, date=date, mandatory=mandatory)
+
+        return EventCreateMutation(event=event)
+
+class Mutation:
+    create_event = EventCreateMutation.Field()
