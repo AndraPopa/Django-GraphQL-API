@@ -91,6 +91,19 @@ class EventUpdateMutation(graphene.Mutation):
         return EventUpdateMutation(event=event)
 
 
+class EventDeleteMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+
+    event = graphene.Field(EventType)
+
+    def mutate(self, info, id):
+        event = Event.objects.get(pk=id)
+        event.delete()
+
+        return EventUpdateMutation(event=None)
+
 class Mutation:
     create_event = EventCreateMutation.Field()
     update_event = EventUpdateMutation.Field()
+    delete_event = EventDeleteMutation.Field()
