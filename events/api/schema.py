@@ -2,6 +2,8 @@ from datetime import datetime
 import graphql_jwt
 import graphene
 from graphene_django.types import DjangoObjectType
+from graphql_jwt.decorators import login_required
+
 from .models import Event, Presenter
 
 
@@ -34,6 +36,7 @@ class Query(graphene.ObjectType):
 
     all_presenters = graphene.List(PresenterType)
 
+    @login_required
     def resolve_all_events(self, info, **kwargs):
         return Event.objects.all()
 
