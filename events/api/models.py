@@ -14,7 +14,9 @@ class Event(models.Model):
     location = models.CharField(max_length=50)
     date = models.DateField()
     mandatory = models.BooleanField(default=False)
-    presenter = models.ForeignKey(Presenter, on_delete=models.PROTECT, blank=True, null=True)
+    presenter = models.ForeignKey(
+        Presenter, on_delete=models.PROTECT, blank=True, null=True
+    )
 
     def __str__(self):
         return self.title

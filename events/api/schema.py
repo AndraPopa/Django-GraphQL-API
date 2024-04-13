@@ -1,6 +1,7 @@
 from datetime import datetime
-import graphql_jwt
+
 import graphene
+import graphql_jwt
 from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required
 
@@ -44,8 +45,8 @@ class Query(graphene.ObjectType):
         return Presenter.objects.all()
 
     def resolve_event(self, info, **kwargs):
-        id = kwargs.get('id')
-        title = kwargs.get('title')
+        id = kwargs.get("id")
+        title = kwargs.get("title")
 
         if id is not None:
             return Event.objects.get(pk=id)
@@ -105,6 +106,7 @@ class EventDeleteMutation(graphene.Mutation):
         event.delete()
 
         return EventUpdateMutation(event=None)
+
 
 class Mutation:
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()

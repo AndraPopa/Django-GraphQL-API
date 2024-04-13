@@ -7,26 +7,39 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0001_initial'),
+        ("api", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Presenter',
+            name="Presenter",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=32)),
-                ('surname', models.CharField(max_length=32)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=32)),
+                ("surname", models.CharField(max_length=32)),
             ],
         ),
         migrations.RenameField(
-            model_name='event',
-            old_name='name',
-            new_name='title',
+            model_name="event",
+            old_name="name",
+            new_name="title",
         ),
         migrations.AddField(
-            model_name='event',
-            name='presenter',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='api.presenter'),
+            model_name="event",
+            name="presenter",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to="api.presenter",
+            ),
         ),
     ]
