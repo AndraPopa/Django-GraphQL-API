@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import graphql_jwt
 import graphene
 from graphene_django.types import DjangoObjectType
 from .models import Event, Presenter
@@ -104,6 +104,8 @@ class EventDeleteMutation(graphene.Mutation):
         return EventUpdateMutation(event=None)
 
 class Mutation:
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+
     create_event = EventCreateMutation.Field()
     update_event = EventUpdateMutation.Field()
     delete_event = EventDeleteMutation.Field()
