@@ -108,6 +108,7 @@ class EventDeleteMutation(graphene.Mutation):
 
 class Mutation:
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
 
     create_event = EventCreateMutation.Field()
     update_event = EventUpdateMutation.Field()
